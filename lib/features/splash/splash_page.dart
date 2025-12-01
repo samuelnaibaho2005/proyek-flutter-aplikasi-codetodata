@@ -17,7 +17,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 2), _goNext);
+    Timer(const Duration(seconds: 5), _goNext);
   }
 
   void _goNext() {
@@ -37,35 +37,12 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
     return Scaffold(
-      backgroundColor: colorScheme.primary,
+      backgroundColor: const Color(0xFF283845),
       body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(
-              Icons.analytics_outlined,
-              size: 80,
-              color: Colors.white,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'CodetoData',
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'From Code to E-Commerce Insight',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.white70,
-              ),
-            ),
-          ],
+        child: Image.asset(
+          'assets/images/logo_app.png',
+          width: 600,
         ),
       ),
     );

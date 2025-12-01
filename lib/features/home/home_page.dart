@@ -88,8 +88,8 @@ class _HomeDashboard extends StatelessWidget {
                 _CategoryCard(title: 'R', icon: Icons.bar_chart),
                 _CategoryCard(title: 'SQL', icon: Icons.table_chart_outlined),
                 _CategoryCard(
-                  title: 'DS E-Commerce',
-                  icon: Icons.store_mall_directory,
+                  title: 'Artificial Intelligent',
+                  icon: Icons.ac_unit_sharp,
                 ),
               ],
             ),
