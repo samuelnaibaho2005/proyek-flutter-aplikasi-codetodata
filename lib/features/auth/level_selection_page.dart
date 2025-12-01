@@ -23,7 +23,7 @@ class LevelSelectionPage extends StatelessWidget {
     const Color primaryColor = Color(0xFF283845); // Biru Gelap
     const Color secondaryColor = Color(0xFF202C39); // Warna gradien kedua
     const Color accentColor = Color(0xFFF2D593);
-    
+
     return Scaffold(
       // --- PERUBAHAN 2: AppBar Transparan & Latar Belakang ---
       backgroundColor: Colors.transparent,
