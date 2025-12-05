@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     final pages = <Widget>[
       _HomeDashboard(name: auth.name, level: auth.level),
       const CourseListPage(),
-      const _QuizPlaceholderPage(),
+      // const _QuizPlaceholderPage(),
       const VideoListPage(),
       const ProfilePage(),
     ];
@@ -76,11 +76,6 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(Icons.menu_book_outlined),
               selectedIcon: Icon(Icons.menu_book),
               label: 'Materi',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.quiz_outlined),
-              selectedIcon: Icon(Icons.quiz),
-              label: 'Quiz',
             ),
             NavigationDestination(
               icon: Icon(Icons.ondemand_video_outlined),
