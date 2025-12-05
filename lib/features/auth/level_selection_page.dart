@@ -28,7 +28,7 @@ class LevelSelectionPage extends StatelessWidget {
       // --- PERUBAHAN 2: AppBar Transparan & Latar Belakang ---
       backgroundColor: Colors.transparent,
       appBar: AppBar(
-        title: const Text('Pilih Tingkat Anda'),
+        title: const Text('Pilih Latar Belakang Anda'),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -38,7 +38,7 @@ class LevelSelectionPage extends StatelessWidget {
       body: Container(
         // --- PERUBAHAN 3: Latar Belakang Gradien ---
         width: double.infinity,
-        height: double.infinity,
+        // height: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [primaryColor, secondaryColor],
@@ -52,8 +52,9 @@ class LevelSelectionPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Image.asset('assets/images/logo_app.png', height: 200),
                 Text(
-                  'Pilih satu sesuai kemampuan saat ini:',
+                  'Pilih latar belakang anda saat ini',
                   // --- PERUBAHAN 4: Style Teks Judul ---
                   style: Theme
                       .of(context)
@@ -65,7 +66,7 @@ class LevelSelectionPage extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 48),
+                const SizedBox(height: 30),
 
                 // --- PERUBAHAN 5: Style Tombol Pilihan ---
                 // Tombol utama dengan gaya paling menonjol
@@ -115,9 +116,9 @@ class LevelSelectionPage extends StatelessWidget {
                       side: BorderSide(color: accentColor.withOpacity(0.5)),
                     ),
                   ),
-                  onPressed: () => _selectLevel(context, 'Profesional'),
+                  onPressed: () => _selectLevel(context, 'Pekerja'),
                   child: const Text(
-                    'Profesional',
+                    'Pekerja',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                 ),

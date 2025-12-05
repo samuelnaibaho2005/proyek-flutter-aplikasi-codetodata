@@ -16,7 +16,7 @@ class Lesson {
 class Course {
   final String id;
   final String title;
-  final String category; // Python / R / SQL / DS E-Commerce
+  final String category; // Python / R / SQL / AI
   final String level; // Pemula / Menengah
   final String description;
   final List<Lesson> lessons;

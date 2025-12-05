@@ -37,16 +37,22 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       body: pages[_currentIndex],
-      // --- PERUBAHAN 1: Styling NavigationBar ---
       bottomNavigationBar: NavigationBarTheme(
         data: NavigationBarThemeData(
           backgroundColor: primaryColor,
           indicatorColor: accentColor.withOpacity(0.2),
           labelTextStyle: MaterialStateProperty.resolveWith((states) {
             if (states.contains(MaterialState.selected)) {
-              return const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: accentColor);
+              return const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: accentColor,
+              );
             }
-            return TextStyle(fontSize: 12, color: Colors.white.withOpacity(0.7));
+            return TextStyle(
+              fontSize: 12,
+              color: Colors.white.withOpacity(0.7),
+            );
           }),
           iconTheme: MaterialStateProperty.resolveWith((states) {
             if (states.contains(MaterialState.selected)) {
@@ -61,11 +67,31 @@ class _HomePageState extends State<HomePage> {
             setState(() => _currentIndex = index);
           },
           destinations: const [
-            NavigationDestination(icon: Icon(Icons.home_outlined), selectedIcon: Icon(Icons.home), label: 'Home'),
-            NavigationDestination(icon: Icon(Icons.menu_book_outlined), selectedIcon: Icon(Icons.menu_book), label: 'Materi'),
-            NavigationDestination(icon: Icon(Icons.quiz_outlined), selectedIcon: Icon(Icons.quiz), label: 'Quiz'),
-            NavigationDestination(icon: Icon(Icons.ondemand_video_outlined), selectedIcon: Icon(Icons.ondemand_video), label: 'Video'),
-            NavigationDestination(icon: Icon(Icons.person_outline), selectedIcon: Icon(Icons.person), label: 'Profil'),
+            NavigationDestination(
+              icon: Icon(Icons.home_outlined),
+              selectedIcon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.menu_book_outlined),
+              selectedIcon: Icon(Icons.menu_book),
+              label: 'Materi',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.quiz_outlined),
+              selectedIcon: Icon(Icons.quiz),
+              label: 'Quiz',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.ondemand_video_outlined),
+              selectedIcon: Icon(Icons.ondemand_video),
+              label: 'Video',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.person_outline),
+              selectedIcon: Icon(Icons.person),
+              label: 'Profil',
+            ),
           ],
         ),
       ),
@@ -73,6 +99,9 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+// -----------------------------------------------------------------------------
+// DASHBOARD HOME
+// -----------------------------------------------------------------------------
 class _HomeDashboard extends StatelessWidget {
   final String? name;
   final String? level;
@@ -92,7 +121,7 @@ class _HomeDashboard extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // --- PERUBAHAN 2: Latar Belakang Gradien (Lapisan Bawah) ---
+          // Latar Belakang Gradien (lapisan bawah)
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -103,19 +132,30 @@ class _HomeDashboard extends StatelessWidget {
             ),
           ),
 
-          // --- PERUBAHAN 3: Konten Utama (Lapisan Atas) ---
+          // Konten utama
           Column(
             children: [
-              // --- Header Melengkung ---
+              // -----------------------------------------------------------------
+              // HEADER MELENGKUNG + SEARCH BAR
+              // -----------------------------------------------------------------
               SizedBox(
-                height: 200,
+                height: 230,
                 child: Stack(
                   children: [
                     // Bentuk melengkung di latar belakang header
                     ClipPath(
                       clipper: _HeaderClipper(),
                       child: Container(
-                        color: Color(0xFF26A69A),
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Color(0xFF00C8A0), // hijau terang
+                              Color(0xFF26A69A), // teal
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                        ),
                       ),
                     ),
                     // Konten di dalam header
@@ -123,23 +163,32 @@ class _HomeDashboard extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 24),
                       child: SafeArea(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            const SizedBox(height: 16),
                             Text(
                               'Halo, $greetingName 👋',
-                              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineSmall
+                                  ?.copyWith(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
                               ),
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              level != null ? '$level' : 'Ayo pilih level belajar kamu',
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                  color: Colors.white
-                              ),
+                              level != null
+                                  ? '$level'
+                                  : 'Ayo pilih level belajar kamu',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(color: Colors.white),
                             ),
+                            const SizedBox(height: 16),
+                            // SEARCH BAR
+                            _HomeSearchBar(),
                           ],
                         ),
                       ),
@@ -148,52 +197,73 @@ class _HomeDashboard extends StatelessWidget {
                 ),
               ),
 
-              // --- Konten yang Bisa di-scroll ---
+              // -----------------------------------------------------------------
+              // KONTEN SCROLLABLE
+              // -----------------------------------------------------------------
               Expanded(
                 child: ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   children: [
-                    // Image.asset('assets/images/logo.png', height: 100),
+                    const SizedBox(height: 8),
+
+                    // BANNER PROMOSI
+                    const _PromoBanner(),
+                    const SizedBox(height: 24),
+
+                    // CARD LANJUTKAN BELAJAR
+                    const _ContinueLearningCard(),
+                    const SizedBox(height: 32),
+
+                    // MULAI BELAJAR (KATEGORI)
                     Text(
                       'Mulai belajar',
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      style:
+                      Theme.of(context).textTheme.titleLarge?.copyWith(
                         color: accentColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 16),
-                    // --- PERUBAHAN 4: Daftar Kategori Horizontal ---
                     SizedBox(
-                      height: 100, // Tinggi area scroll horizontal
+                      height: 100,
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: const [
                           _CategoryCard(title: 'Python', icon: Icons.code),
                           SizedBox(width: 12),
-                          _CategoryCard(title: 'R', icon: Icons.bar_chart),
+                          _CategoryCard(
+                              title: 'R', icon: Icons.bar_chart_outlined),
                           SizedBox(width: 12),
-                          _CategoryCard(title: 'SQL', icon: Icons.table_chart_outlined),
+                          _CategoryCard(
+                              title: 'SQL',
+                              icon: Icons.table_chart_outlined),
                           SizedBox(width: 12),
-                          _CategoryCard(title: 'Artificial Intelligent', icon: Icons.ac_unit_sharp),
+                          _CategoryCard(
+                              title: 'Artificial Intelligent',
+                              icon: Icons.auto_awesome),
                         ],
                       ),
                     ),
                     const SizedBox(height: 32),
+
+                    // PROGRESS BELAJAR
                     Text(
                       'Progress Belajar',
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      style:
+                      Theme.of(context).textTheme.titleLarge?.copyWith(
                         color: accentColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 16),
-                    // --- PERUBAHAN 5: Kartu Progress dengan Gaya Baru ---
                     Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.1),
+                        color: Colors.white.withOpacity(0.08),
                         borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: accentColor.withOpacity(0.3)),
+                        border: Border.all(
+                          color: accentColor.withOpacity(0.3),
+                        ),
                       ),
                       child: Row(
                         children: [
@@ -206,7 +276,8 @@ class _HomeDashboard extends StatelessWidget {
                           const SizedBox(width: 16),
                           CircularProgressIndicator(
                             value: 0.4, // dummy
-                            valueColor: const AlwaysStoppedAnimation<Color>(ijoColor),
+                            valueColor: const AlwaysStoppedAnimation<Color>(
+                                ijoColor),
                             backgroundColor: accentColor.withOpacity(0.2),
                           ),
                         ],
@@ -224,17 +295,19 @@ class _HomeDashboard extends StatelessWidget {
   }
 }
 
-// --- PERUBAHAN 6: Custom Clipper untuk Bentuk Melengkung ---
+// -----------------------------------------------------------------------------
+// CUSTOM CLIPPER HEADER
+// -----------------------------------------------------------------------------
 class _HeaderClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     final path = Path();
-    path.lineTo(0, size.height * 0.8);
+    path.lineTo(0, size.height * 0.75);
     path.quadraticBezierTo(
       size.width / 2,
       size.height,
       size.width,
-      size.height * 0.8,
+      size.height * 0.75,
     );
     path.lineTo(size.width, 0);
     path.close();
@@ -242,12 +315,236 @@ class _HeaderClipper extends CustomClipper<Path> {
   }
 
   @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    return false;
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
+}
+
+// -----------------------------------------------------------------------------
+// SEARCH BAR
+// -----------------------------------------------------------------------------
+class _HomeSearchBar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.15),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: Colors.white.withOpacity(0.3)),
+      ),
+      child: Row(
+        children: [
+          Icon(
+            Icons.search,
+            color: Colors.white.withOpacity(1),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: TextField(
+              style: const TextStyle(color: Colors.white),
+              cursorColor: Colors.white,
+              decoration: InputDecoration(
+                hintText: 'Cari kursus atau materi...',
+                hintStyle: TextStyle(
+                  color: Colors.white.withOpacity(0.7),
+                ),
+                border: InputBorder.none,
+              ),
+              // NOTE: untuk sekarang belum ada fungsi filter,
+              // nanti bisa dihubungkan ke halaman pencarian.
+              onSubmitted: (value) {
+                if (value.trim().isEmpty) return;
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      'Pencarian "$value" akan ditambahkan nanti.',
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
+// -----------------------------------------------------------------------------
+// BANNER PROMO
+// -----------------------------------------------------------------------------
+class _PromoBanner extends StatelessWidget {
+  const _PromoBanner();
 
+  @override
+  Widget build(BuildContext context) {
+    const Color accentColor = Color(0xFFF2D593);
+    const Color ijoColor = Color(0xFF00C8A0);
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [ijoColor, Color(0xFF26A69A)],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+        ),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          const Icon(
+            Icons.local_fire_department_outlined,
+            color: Colors.white,
+            size: 32,
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  'Baru! Artificial Intelligent untuk Pemula',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 4),
+                Text(
+                  'Belajar dasar AI from scratch',
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 12),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: accentColor,
+              foregroundColor: Colors.black87,
+              padding:
+              const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+            onPressed: () {
+              // Untuk sekarang arahkan ke daftar kursus umum.
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const CourseListPage(),
+                ),
+              );
+            },
+            child: const Text(
+              'Mulai',
+              style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// -----------------------------------------------------------------------------
+// CONTINUE LEARNING CARD
+// -----------------------------------------------------------------------------
+class _ContinueLearningCard extends StatelessWidget {
+  const _ContinueLearningCard();
+
+  @override
+  Widget build(BuildContext context) {
+    const Color accentColor = Color(0xFFF2D593);
+
+    // Saat ini masih dummy. Nanti bisa dihubungkan dengan progress asli
+    // (misal disimpan di SharedPreferences).
+    const String courseTitle = 'Python Dasar untuk Data';
+    const String lessonTitle = 'Modul 2 • Tipe Data';
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.06),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: accentColor.withOpacity(0.4),
+        ),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 44,
+            height: 44,
+            decoration: BoxDecoration(
+              color: accentColor.withOpacity(0.2),
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(
+              Icons.play_arrow_rounded,
+              color: accentColor,
+            ),
+          ),
+          const SizedBox(width: 12),
+          const Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Lanjutkan belajar',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 4),
+                Text(
+                  courseTitle,
+                  style: TextStyle(color: Colors.white70, fontSize: 12),
+                ),
+                Text(
+                  lessonTitle,
+                  style: TextStyle(color: Colors.white54, fontSize: 11),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 8),
+          TextButton(
+            onPressed: () {
+              // Untuk saat ini, arahkan ke daftar kursus.
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const CourseListPage(),
+                ),
+              );
+            },
+            child: const Text(
+              'Lanjutkan',
+              style: TextStyle(color: accentColor),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// -----------------------------------------------------------------------------
+// KARTU KATEGORI (GLASSMORPHISM)
+// -----------------------------------------------------------------------------
 class _CategoryCard extends StatelessWidget {
   final String title;
   final IconData icon;
@@ -261,7 +558,6 @@ class _CategoryCard extends StatelessWidget {
     return SizedBox(
       width: 150,
       height: 100,
-      // --- PERUBAHAN 7: Kartu Kategori dengan Gaya Baru (Glassmorphism) ---
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
         child: BackdropFilter(
@@ -278,7 +574,7 @@ class _CategoryCard extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.1),
+                color: Colors.white.withOpacity(0.08),
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(color: accentColor.withOpacity(0.3)),
               ),
@@ -305,11 +601,14 @@ class _CategoryCard extends StatelessWidget {
   }
 }
 
+// -----------------------------------------------------------------------------
+// QUIZ PLACEHOLDER PAGE
+// -----------------------------------------------------------------------------
 class _QuizPlaceholderPage extends StatelessWidget {
   const _QuizPlaceholderPage();
+
   @override
   Widget build(BuildContext context) {
-    // Sesuaikan dengan tema
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -319,10 +618,13 @@ class _QuizPlaceholderPage extends StatelessWidget {
         ),
       ),
       child: const Center(
-        child: Text(
-          'Pilih kursus dulu, lalu mulai quiz dari halaman kursus.',
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.white70, fontSize: 16),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24),
+          child: Text(
+            'Pilih kursus dulu, lalu mulai quiz dari halaman kursus.',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.white70, fontSize: 16),
+          ),
         ),
       ),
     );
