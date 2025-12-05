@@ -13,13 +13,12 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final auth = context.watch<AuthService>();
 
-    // --- PERUBAHAN 1: Definisikan Warna Tema ---
+    // Warna tema
     const Color primaryColor = Color(0xFF283845);
     const Color secondaryColor = Color(0xFF202C39);
     const Color accentColor = Color(0xFFF2D593);
 
     return Scaffold(
-      // --- PERUBAHAN 2: Latar Belakang Transparan & AppBar ---
       backgroundColor: Colors.transparent,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -30,7 +29,6 @@ class ProfilePage extends StatelessWidget {
         foregroundColor: accentColor,
       ),
       body: Container(
-        // --- PERUBAHAN 3: Latar Belakang Gradien ---
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
@@ -44,13 +42,17 @@ class ProfilePage extends StatelessWidget {
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
             children: [
-              // --- PERUBAHAN 4: Header Profil ---
+              // HEADER PROFIL
               Column(
                 children: [
                   CircleAvatar(
                     radius: 50,
                     backgroundColor: accentColor.withOpacity(0.2),
-                    child: const Icon(Icons.person, size: 50, color: accentColor),
+                    child: const Icon(
+                      Icons.person,
+                      size: 50,
+                      color: accentColor,
+                    ),
                   ),
                   const SizedBox(height: 16),
                   Text(
@@ -82,7 +84,7 @@ class ProfilePage extends StatelessWidget {
               ),
               const SizedBox(height: 32),
 
-              // --- PERUBAHAN 5: Statistik Belajar ---
+              // STATISTIK BELAJAR (masih dummy)
               Text(
                 'Statistik Belajar',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -93,54 +95,68 @@ class ProfilePage extends StatelessWidget {
               const SizedBox(height: 16),
               const Row(
                 children: [
-                  Expanded(child: _StatCard(value: '5', label: 'Kursus Diikuti')),
+                  Expanded(
+                    child: _StatCard(value: '5', label: 'Kursus Diikuti'),
+                  ),
                   SizedBox(width: 12),
-                  Expanded(child: _StatCard(value: '23', label: 'Modul Selesai')),
+                  Expanded(
+                    child: _StatCard(value: '23', label: 'Modul Selesai'),
+                  ),
                   SizedBox(width: 12),
-                  Expanded(child: _StatCard(value: '85%', label: 'Skor Quiz')),
+                  Expanded(
+                    child: _StatCard(value: '🥇', label: 'Data Scientist'),
+                  ),
                 ],
               ),
               const SizedBox(height: 32),
 
-              // --- PERUBAHAN 6: Menu Manajemen Akun ---
+              // MENU MANAJEMEN AKUN
               _ProfileMenuTile(
                 icon: Icons.edit_outlined,
                 title: 'Edit Profil',
                 onTap: () {
-                  /* TODO: Navigasi ke halaman edit profil */
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const EditProfilePage(),
+                    ),
+                  );
                 },
               ),
               _ProfileMenuTile(
                 icon: Icons.lock_outline,
                 title: 'Ubah Password',
                 onTap: () {
-                  /* TODO: Navigasi ke halaman ubah password */
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const ChangePasswordPage(),
+                    ),
+                  );
                 },
               ),
               _ProfileMenuTile(
                 icon: Icons.info_outline,
                 title: 'Tentang CodetoData',
                 onTap: () {
-                  /* TODO: Tampilkan dialog tentang aplikasi */
-                },
-              ),
-              _ProfileMenuTile(
-                icon: Icons.star_outline,
-                title: 'Beri Rating Aplikasi',
-                onTap: () {
-                  /* TODO: Buka Play Store/App Store */
+                  showDialog(
+                    context: context,
+                    builder: (_) => const _AboutCodetoDataDialog(),
+                  );
                 },
               ),
               const SizedBox(height: 24),
 
-              // --- PERUBAHAN 7: Tombol Logout ---
+              // TOMBOL LOGOUT
               FilledButton.icon(
                 style: FilledButton.styleFrom(
                   backgroundColor: primaryColor,
                   foregroundColor: Colors.redAccent,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
-                    side: BorderSide(color: Colors.redAccent.withOpacity(0.5)),
+                    side: BorderSide(
+                      color: Colors.redAccent.withOpacity(0.5),
+                    ),
                   ),
                   minimumSize: const Size.fromHeight(50),
                 ),
@@ -167,7 +183,9 @@ class ProfilePage extends StatelessWidget {
   }
 }
 
-// Widget kustom untuk kartu statistik
+// ============================================================================
+// KARTU STATISTIK
+// ============================================================================
 class _StatCard extends StatelessWidget {
   final String value;
   final String label;
@@ -218,7 +236,9 @@ class _StatCard extends StatelessWidget {
   }
 }
 
-// Widget kustom untuk menu profil
+// ============================================================================
+// TILE MENU PROFIL
+// ============================================================================
 class _ProfileMenuTile extends StatelessWidget {
   final IconData icon;
   final String title;
@@ -245,16 +265,334 @@ class _ProfileMenuTile extends StatelessWidget {
             ),
             child: ListTile(
               onTap: onTap,
-              leading: Icon(icon, color: const Color(0xFFF2D593)),
-              title: Text(
-                title,
-                style: const TextStyle(color: Colors.white),
+              leading: const Icon(
+                Icons.circle,
+                size: 0, // dummy, biar gak kedip pas change icon color
               ),
-              trailing: const Icon(Icons.chevron_right, color: Colors.white70),
+              // pakai Row supaya icon bisa custom warna
+              title: Row(
+                children: [
+                  Icon(icon, color: const Color(0xFFF2D593)),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      title,
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+              trailing:
+              const Icon(Icons.chevron_right, color: Colors.white70),
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+// ============================================================================
+// HALAMAN EDIT PROFIL
+// ============================================================================
+class EditProfilePage extends StatefulWidget {
+  const EditProfilePage({super.key});
+
+  @override
+  State<EditProfilePage> createState() => _EditProfilePageState();
+}
+
+class _EditProfilePageState extends State<EditProfilePage> {
+  late TextEditingController _nameController;
+  late TextEditingController _emailController;
+
+  @override
+  void initState() {
+    super.initState();
+    final auth = context.read<AuthService>();
+    _nameController = TextEditingController(text: auth.name ?? '');
+    _emailController = TextEditingController(text: auth.email ?? '');
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _save() async {
+    final auth = context.read<AuthService>();
+    final name = _nameController.text.trim();
+    final email = _emailController.text.trim();
+
+    if (name.isEmpty || email.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Nama dan email tidak boleh kosong')),
+      );
+      return;
+    }
+
+    await auth.updateProfile(name: name, email: email);
+
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Profil berhasil diperbarui')),
+    );
+    Navigator.pop(context);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    const Color primaryColor = Color(0xFF283845);
+    const Color secondaryColor = Color(0xFF202C39);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Edit Profil'),
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [primaryColor, secondaryColor],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding:
+            const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            child: Column(
+              children: [
+                TextField(
+                  controller: _nameController,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
+                    labelText: 'Nama',
+                    labelStyle: TextStyle(color: Colors.white70),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white54),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: _emailController,
+                  style: const TextStyle(color: Colors.white),
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                    labelText: 'Email',
+                    labelStyle: TextStyle(color: Colors.white70),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white54),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                  ),
+                ),
+                const Spacer(),
+                FilledButton(
+                  onPressed: _save,
+                  child: const Text('Simpan Perubahan'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ============================================================================
+// HALAMAN UBAH PASSWORD
+// ============================================================================
+class ChangePasswordPage extends StatefulWidget {
+  const ChangePasswordPage({super.key});
+
+  @override
+  State<ChangePasswordPage> createState() => _ChangePasswordPageState();
+}
+
+class _ChangePasswordPageState extends State<ChangePasswordPage> {
+  final _oldPasswordController = TextEditingController();
+  final _newPasswordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+
+  bool _isLoading = false;
+
+  @override
+  void dispose() {
+    _oldPasswordController.dispose();
+    _newPasswordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _changePassword() async {
+    final oldPass = _oldPasswordController.text;
+    final newPass = _newPasswordController.text;
+    final confirm = _confirmPasswordController.text;
+
+    if (oldPass.isEmpty || newPass.isEmpty || confirm.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Semua field wajib diisi')),
+      );
+      return;
+    }
+
+    if (newPass != confirm) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Konfirmasi password baru tidak cocok')),
+      );
+      return;
+    }
+
+    setState(() => _isLoading = true);
+    final auth = context.read<AuthService>();
+    final success = await auth.changePassword(
+      oldPassword: oldPass,
+      newPassword: newPass,
+    );
+    setState(() => _isLoading = false);
+
+    if (!success) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Password lama salah')),
+      );
+      return;
+    }
+
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Password berhasil diubah')),
+    );
+    Navigator.pop(context);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    const Color primaryColor = Color(0xFF283845);
+    const Color secondaryColor = Color(0xFF202C39);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Ubah Password'),
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [primaryColor, secondaryColor],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding:
+            const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            child: Column(
+              children: [
+                TextField(
+                  controller: _oldPasswordController,
+                  obscureText: true,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
+                    labelText: 'Password lama',
+                    labelStyle: TextStyle(color: Colors.white70),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white54),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: _newPasswordController,
+                  obscureText: true,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
+                    labelText: 'Password baru',
+                    labelStyle: TextStyle(color: Colors.white70),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white54),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: _confirmPasswordController,
+                  obscureText: true,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
+                    labelText: 'Konfirmasi password baru',
+                    labelStyle: TextStyle(color: Colors.white70),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white54),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                  ),
+                ),
+                const Spacer(),
+                FilledButton(
+                  onPressed: _isLoading ? null : _changePassword,
+                  child: _isLoading
+                      ? const SizedBox(
+                    width: 18,
+                    height: 18,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                      : const Text('Simpan Password'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ============================================================================
+// DIALOG TENTANG CODETODATA
+// ============================================================================
+class _AboutCodetoDataDialog extends StatelessWidget {
+  const _AboutCodetoDataDialog();
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Tentang CodetoData'),
+      content: const Text(
+        'CodetoData adalah aplikasi pembelajaran yang membantu '
+            'mahasiswa dan profesional pemula mempelajari Python, R, SQL, '
+            'dan data science yang relevan dengan industri e-commerce '
+            'seperti Tokopedia.\n\n'
+            'Fitur utama:\n'
+            '• Materi terstruktur\n'
+            '• Video pembelajaran\n'
+            '• Quiz interaktif dengan sound\n'
+            '• Integrasi dokumentasi melalui WebView',
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('Tutup'),
+        ),
+      ],
     );
   }
 }
