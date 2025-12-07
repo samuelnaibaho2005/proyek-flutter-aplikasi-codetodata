@@ -36,6 +36,10 @@
 
 ---
 
+## 📷 Dokumentasi Aplikasi <br>
+<img src="/assets/images/dokumentasi_login.png" width="200"> <img src="/assets/images/dokumentasi_home.png" width="200"> <img src="/assets/images/dokumentasi_modul.png" width="200"> <img src="/assets/images/dokumentasi_profile.png" width="200">
+
+---
 ## 📁 Struktur Proyek (Folder & File)
 
 ```
