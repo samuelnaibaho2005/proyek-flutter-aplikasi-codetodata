@@ -84,7 +84,7 @@ class ProfilePage extends StatelessWidget {
               ),
               const SizedBox(height: 32),
 
-              // STATISTIK BELAJAR (masih dummy)
+              // STATISTIK BELAJAR
               Text(
                 'Statistik Belajar',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -114,6 +114,7 @@ class ProfilePage extends StatelessWidget {
               _ProfileMenuTile(
                 icon: Icons.edit_outlined,
                 title: 'Edit Profil',
+
                 onTap: () {
                   Navigator.push(
                     context,
