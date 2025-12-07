@@ -1,16 +1,133 @@
-# proyek_akhir_samuel_naibaho_2305181036
+# CodetoData
 
-A new Flutter project.
+**CodetoData** — Aplikasi mobile Flutter untuk belajar Python, R, SQL, dan dasar AI. Cocok untuk pemula yang ingin memahami dasar-dasar pemrograman & data/AI sebelum melangkah lebih jauh.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🎯 Tujuan & Fitur Utama
 
-A few resources to get you started if this is your first Flutter project:
+- 🧑‍💻 **Materi Pembelajaran**  
+  – Belajar Python, R, SQL, dan AI Dasar (teori) dari nol, lewat modul & sub-modul bertahap.  
+  – Tiap materi ada teks & penjelasan singkat.  
+  – Link ke dokumentasi eksternal (misalnya W3Schools / Wikipedia) via WebView.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- 📺 **Video Pembelajaran**  
+  – Integrasi YouTube → memungkinkan pengguna menonton video tutorial langsung dari aplikasi.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- ❓ **Quiz & Evaluasi**  
+  – Quiz interaktif per topik (pilihan ganda).  
+  – Sound effect untuk jawaban benar/salah.  
+  – Skor hasil quiz disimpan — sebagai feedback belajar.
+
+- 🔐 **Autentikasi Lokal**  
+  – Registrasi & login tanpa backend — data disimpan secara lokal (SharedPreferences).  
+  – Edit profil & ubah password tersedia.  
+  – Level pengguna — misalnya: Umum / Mahasiswa / Profesional.
+
+- 📚 **Kursus & Organisasi Materi**  
+  – Materi disusun per “course” → berisi modul (lesson).  
+  – Kategori course: Python, R, SQL, Artificial Intelligent.  
+  – Pembagian level: semua saat ini untuk level “Pemula”.
+
+- 🧩 **Profil & Statistik**  
+  – Tampilan profil dengan nama, email, level.  
+  – Statistik belajar (kursus diikuti, modul selesai, skor quiz).  
+  – Rencana ekspansi: badge, achievements, progress tracking.
+
+---
+
+## 📁 Struktur Proyek (Folder & File)
+
+lib/
+main.dart                — Entry point aplikasi
+routes.dart              — Daftar rute navigasi
+
+services/
+auth_service.dart      — Logika user / session / profil / auth
+
+models/
+course.dart            — Model Course & Lesson
+video_item.dart        — Model VideoItem
+quiz_question.dart     — Model QuizQuestion
+
+data/
+sample_courses.dart    — Data dummy: daftar course & materi
+sample_videos.dart     — Data dummy: daftar video YouTube
+sample_quizzes.dart    — Data dummy: soal-soal quiz
+
+features/
+splash/                — Splash screen
+splash_page.dart
+
+
+auth/                  — Registrasi, login, level selection
+  login_page.dart
+  register_page.dart
+  level_selection_page.dart
+
+home/                  — Halaman utama (dashboard)
+  home_page.dart
+
+learning/              — Materi / course list & detail
+  course_list_page.dart
+  course_detail_page.dart
+
+video/                 — Daftar & pemutar video
+  video_list_page.dart
+
+quiz/                  — Halaman quiz
+  quiz_page.dart
+
+docs/                  — WebView untuk dokumentasi eksternal
+  docs_webview_page.dart
+
+profile/               — Profil user & menu pengaturan
+  profile_page.dart
+
+---
+
+## 🛠️ Dependensi / Package yang Digunakan
+
+- [`provider`](https://pub.dev/packages/provider) — State management, terutama untuk `AuthService`.  
+- [`shared_preferences`](https://pub.dev/packages/shared_preferences) — Menyimpan data user (login, profil) secara lokal.  
+- [`webview_flutter`](https://pub.dev/packages/webview_flutter) — Menampilkan dokumentasi eksternal dalam app.  
+- [`youtube_player_flutter`](https://pub.dev/packages/youtube_player_flutter) — Embed & mainkan video YouTube dalam app.  
+- [`audioplayers`](https://pub.dev/packages/audioplayers) — Memainkan efek suara (benar/salah) di quiz.  
+- `flutter` & `cupertino_icons` — Paket dasar Flutter.
+
+---
+
+## 🚀 Cara Menjalankan (Development)
+
+1. Pastikan Flutter SDK sudah ter-install.  
+2. Clone repository:
+
+   ```bash
+   git clone https://github.com/samuelnaibaho2005/proyek-flutter-aplikasi-codetodata.git
+   cd proyek-flutter-aplikasi-codetodata
+
+
+3. Install dependensi:
+
+   ```bash
+   flutter pub get
+   ```
+
+4. Jalankan app (debug mode):
+
+   ```bash
+   flutter run
+   ```
+
+5. Jika perlu: hot reload / hot restart saat modifikasi kode.
+
+---
+
+## 🎯 Rencana Fitur Berikutnya
+
+* Badge / Achievements & tracking progres belajar berfungsi sepenuhnya.
+* Simpan progress materi/quiz lokal (modul/lesson terakhir).
+* Halaman pencarian materi / course berfungsi sepenuhnya.
+* Dark / Light mode toggle.
+* Simulasi database (SQLite / local storage) untuk menyimpan progress, bukan sekadar data dummy.
+* UI/UX polishing: animasi transisi, layout responsif, ikon & ilustrasi.
