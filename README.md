@@ -38,6 +38,8 @@
 
 ## 📁 Struktur Proyek (Folder & File)
 
+```
+
 lib/
 main.dart                — Entry point aplikasi
 routes.dart              — Daftar rute navigasi
@@ -58,7 +60,6 @@ sample_quizzes.dart    — Data dummy: soal-soal quiz
 features/
 splash/                — Splash screen
 splash_page.dart
-
 
 auth/                  — Registrasi, login, level selection
   login_page.dart
@@ -83,6 +84,7 @@ docs/                  — WebView untuk dokumentasi eksternal
 
 profile/               — Profil user & menu pengaturan
   profile_page.dart
+```
 
 ---
 
@@ -106,7 +108,6 @@ profile/               — Profil user & menu pengaturan
    git clone https://github.com/samuelnaibaho2005/proyek-flutter-aplikasi-codetodata.git
    cd proyek-flutter-aplikasi-codetodata
 
-
 3. Install dependensi:
 
    ```bash
@@ -123,6 +124,15 @@ profile/               — Profil user & menu pengaturan
 
 ---
 
+## 🧩 Cara Menambah Materi / Course
+
+* Buka `lib/data/sample_courses.dart`.
+* Tambahkan entry `Course(...)` dengan `id`, `title`, `category`, `level`, `description`, dan daftar `lessons`.
+* Untuk setiap `Lesson`, definisikan `id`, `title`, `content`, dan optional `docsUrl`.
+* Setelah disimpan, materi akan otomatis tampil di aplikasi di kategori sesuai (lihat bagian “Mulai belajar”).
+
+---
+
 ## 🎯 Rencana Fitur Berikutnya
 
 * Badge / Achievements & tracking progres belajar berfungsi sepenuhnya.
@@ -131,3 +141,11 @@ profile/               — Profil user & menu pengaturan
 * Dark / Light mode toggle.
 * Simulasi database (SQLite / local storage) untuk menyimpan progress, bukan sekadar data dummy.
 * UI/UX polishing: animasi transisi, layout responsif, ikon & ilustrasi.
+
+---
+
+## 💡 Catatan & Disclaimer
+
+* Saat ini aplikasi **tidak memakai backend server** — semua data disimpan lokal, sehingga cocok sebagai prototype atau materi pembelajaran.
+* Data user dan password disimpan di `SharedPreferences` tanpa enkripsi — bukan untuk produksi nyata.
+* Materi, quiz, video bersifat statis & dummy; untuk konten “asli”, perlu pengembangan lanjutan atau backend.
