@@ -6,33 +6,33 @@
 
 ## 🎯 Tujuan & Fitur Utama
 
-- 🧑‍💻 **Materi Pembelajaran**  
-  – Belajar Python, R, SQL, dan AI Dasar (teori) dari nol, lewat modul & sub-modul bertahap.  
-  – Tiap materi ada teks & penjelasan singkat.  
-  – Link ke dokumentasi eksternal (misalnya W3Schools / Wikipedia) via WebView.
+ 1. 🧑‍💻 **Materi Pembelajaran**  
+     - Belajar Python, R, SQL, dan AI Dasar (teori) dari nol, lewat modul & sub-modul bertahap.
+     - Tiap materi ada teks & penjelasan singkat.
+     - Link ke dokumentasi eksternal (misalnya W3Schools / Wikipedia) via WebView.
 
-- 📺 **Video Pembelajaran**  
-  – Integrasi YouTube → memungkinkan pengguna menonton video tutorial langsung dari aplikasi.
+ 2. 📺 **Video Pembelajaran**  
+     - Integrasi YouTube → memungkinkan pengguna menonton video tutorial langsung dari aplikasi.
 
-- ❓ **Quiz & Evaluasi**  
-  – Quiz interaktif per topik (pilihan ganda).  
-  – Sound effect untuk jawaban benar/salah.  
-  – Skor hasil quiz disimpan — sebagai feedback belajar.
+ 3. ❓ **Quiz & Evaluasi**  
+    - Quiz interaktif per topik (pilihan ganda).
+    - Sound effect untuk jawaban benar/salah.
+    - Skor hasil quiz disimpan — sebagai feedback belajar.
 
-- 🔐 **Autentikasi Lokal**  
-  – Registrasi & login tanpa backend — data disimpan secara lokal (SharedPreferences).  
-  – Edit profil & ubah password tersedia.  
-  – Level pengguna — misalnya: Umum / Mahasiswa / Profesional.
+ 5. 🔐 **Autentikasi Lokal**  
+    - Registrasi & login tanpa backend — data disimpan secara lokal (SharedPreferences).
+    - Edit profil & ubah password tersedia.
+    - Level pengguna — misalnya: Umum / Mahasiswa / Profesional.
 
-- 📚 **Kursus & Organisasi Materi**  
-  – Materi disusun per “course” → berisi modul (lesson).  
-  – Kategori course: Python, R, SQL, Artificial Intelligent.  
-  – Pembagian level: semua saat ini untuk level “Pemula”.
+ 6. 📚 **Kursus & Organisasi Materi**  
+    - Materi disusun per “course” → berisi modul (lesson).
+    - Kategori course: Python, R, SQL, Artificial Intelligent.
+    - Pembagian level: semua saat ini untuk level “Pemula”.
 
-- 🧩 **Profil & Statistik**  
-  – Tampilan profil dengan nama, email, level.  
-  – Statistik belajar (kursus diikuti, modul selesai, skor quiz).  
-  – Rencana ekspansi: badge, achievements, progress tracking.
+ 7. 🧩 **Profil & Statistik**  
+    - Tampilan profil dengan nama, email, level.
+    - Statistik belajar (kursus diikuti, modul selesai, skor quiz).
+    - Rencana ekspansi: badge, achievements, progress tracking.
 
 ---
 
