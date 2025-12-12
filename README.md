@@ -89,7 +89,26 @@ docs/                  — WebView untuk dokumentasi eksternal
 profile/               — Profil user & menu pengaturan
   profile_page.dart
 ```
+---
 
+## 🖥️ Environment
+ - Flutter SDK : 3.35
+ - Dark SDK : 3.9
+ - Android minSdkVersion: 21
+ - Android targetSdkVersion: 34
+ - Gradle: 8.2
+
+---
+
+## ⛓️ Depedencies
+ - provider: ^6.1.2
+ - cupertino_icons: ^1.0.8
+  - provider: ^6.1.2
+ - shared_preferences: ^2.2.3
+ - webview_flutter: ^4.8.0
+ - youtube_player_flutter: ^9.0.0
+ - audioplayers: ^6.0.0
+ 
 ---
 
 ## 🛠️ Dependensi / Package yang Digunakan
@@ -105,7 +124,7 @@ profile/               — Profil user & menu pengaturan
 
 ## 🚀 Cara Menjalankan (Development)
 
-1. Pastikan Flutter SDK sudah ter-install.  
+1. Pastikan Flutter SDK sudah ter-instal.  
 2. Clone repository:
 
    ```bash
