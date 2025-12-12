@@ -153,22 +153,3 @@ profile/               — Profil user & menu pengaturan
 * Tambahkan entry `Course(...)` dengan `id`, `title`, `category`, `level`, `description`, dan daftar `lessons`.
 * Untuk setiap `Lesson`, definisikan `id`, `title`, `content`, dan optional `docsUrl`.
 * Setelah disimpan, materi akan otomatis tampil di aplikasi di kategori sesuai (lihat bagian “Mulai belajar”).
-
----
-
-## 🎯 Rencana Fitur Berikutnya
-
-* Badge / Achievements & tracking progres belajar berfungsi sepenuhnya.
-* Simpan progress materi/quiz lokal (modul/lesson terakhir).
-* Halaman pencarian materi / course berfungsi sepenuhnya.
-* Dark / Light mode toggle.
-* Simulasi database (SQLite / local storage) untuk menyimpan progress, bukan sekadar data dummy.
-* UI/UX polishing: animasi transisi, layout responsif, ikon & ilustrasi.
-
----
-
-## 💡 Catatan & Disclaimer
-
-* Saat ini aplikasi **tidak memakai backend server** — semua data disimpan lokal, sehingga cocok sebagai prototype atau materi pembelajaran.
-* Data user dan password disimpan di `SharedPreferences` tanpa enkripsi — bukan untuk produksi nyata.
-* Materi, quiz, video bersifat statis & dummy; untuk konten “asli”, perlu pengembangan lanjutan atau backend.
